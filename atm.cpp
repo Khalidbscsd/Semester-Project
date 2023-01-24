@@ -8,34 +8,28 @@ void writeFile()
 {
 	// Open the file in append mode
     ofstream file("users.txt", ios::app);
-   
     if (file.is_open()) {
        // Write comma-separated data to the file
-        file << "Khalid,03061615388,1234,5000" << endl;
-        file << "Ahsaan,1234567890,5678,2000" << endl;
-        file << "Rajab,09876543212,3434,6754" << endl;
-        file << "Daniyal,12345678999,3233,4500" << endl;
+    ifstream file2("users.txt");
+    string line;
+
         // Close the file
         file.close();
 
     } else {
         cout << "Unable to open file." << endl;
     }
-    
 }
 int main()	
-	{
-	string account1;
-    string account2;
+	{string trans;
 	int choice;
 	double amount;
 	 {
-    string accounts[4][4];
-	
+    string accounts[10][4];
 	 // Open the file for reading
     ifstream file2("users.txt");
     string line;
-
+    ifstream trans("transaction.txt");
     // Read the file line by line
     int accountItr = 0;
     while (getline(file2, line)) {
@@ -51,7 +45,7 @@ int main()
     }
     file2.close();
     
- 	/*for(int i = 0; i < 4; i++)
+ 	/*for(int i = 0; i < 10; i++)
     {
     	cout << accounts[i][1] << " " << accounts[i][2] << endl;
 	}*/
@@ -59,9 +53,7 @@ int main()
     string account_no, pin;
     int tries = 0;
     bool found = false;
-    
     int current_user = -1;
-    
     while(tries < 3)
     {	
     	{
@@ -74,7 +66,7 @@ int main()
 		cout<<x;
 		if(i<10)
 		Sleep (300);
-		if(i<=10 &&i<20);
+		if(i<=10 && i<20);
 		Sleep(150);
 		if(i<10)
 		Sleep(25);
@@ -91,7 +83,7 @@ int main()
         cout << account_no << " " << pin;
         cout<<"\nChecking user...\n";
         
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 10; i++)
         {
         	if(account_no == accounts[i][1])
         	{
@@ -110,30 +102,23 @@ int main()
         {
         	break;
 		}
-		cout << "\nuser not found :(. Please try again with correct credentials!\n";
+		cout << "\nuser not found : Please try again with correct Information !\n";
     }
     
-    cout << "\n Current User : " << accounts[current_user][0] << " = Account No : " <<  accounts[current_user][1] ; 
-    
-    
-    // switch
+    cout << "\n Current User : " << accounts[current_user][0] << " = Account No : " <<  accounts[current_user][1] ;   
     stringstream ss; 
    	ss << accounts[current_user][3];
    	int balance;
    	ss >> balance;
-   	balance--;
-    
-    cout << "\n Current User : " << accounts[current_user][0] << " = Balance : " <<  balance<<"$"; 
    		cout<<"\n\n\n";
 		cout << "\t\t ******************MENU***************" <<endl;
         cout << "\t\t *                                   *" <<endl;
-        cout << "\t\t *      Welcome to the ATM Machine   *" << endl;
         cout << "\t\t *      1. Check balance             *" << endl;
         cout << "\t\t *      2. Deposit money             *" << endl;
         cout << "\t\t *      3. Withdraw money            *" << endl;
         cout << "\t\t *      4. Transfer money            *" << endl;
-        cout << "\t\t *      5. Exit                      *" << endl;
-        cout << "\t\t *                                   *" << endl;
+        cout << "\t\t *      5. Transtations              *" << endl;
+        cout << "\t\t *      6. Exit                      *" << endl;
         cout << "\t\t *************************************" << endl;
    
         cout << "\t\t Enter your choice: ";
@@ -165,8 +150,21 @@ int main()
                 else
                 cout<<"\t Insufficient Balance !";
                 break;
-            case 5:
+            case 5:	
+				cout<<"last 10 transtations are = "<<endl;
+                {
+                	string trans;
+
+					ifstream MyReadFile("transaction.txt");
+					while (getline (MyReadFile, trans)) {
+ 					 cout << trans<<endl;
+                    }
+                MyReadFile.close();
+				}
+                break;
+            case 6:
                 return 0;
+
             default:
                 cout << "\t Invalid choice" << endl;
                 break;
@@ -175,4 +173,3 @@ int main()
 			}
 		}
 }
-
